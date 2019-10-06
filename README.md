@@ -1,7 +1,8 @@
 # SQL-Presidential-Database
 
 ## Introduction
-	The President of the United States is the most powerful individual on the Earth. 
+	
+The President of the United States is the most powerful individual on the Earth. 
 Out of a nation of 330 million people we have one person who is elected to represent the
 country and serve as President. The President of the United States has an incredible amount
 of power and influence on not only the country but also the world. Only 45 gentlemen have served
