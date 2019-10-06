@@ -1,0 +1,100 @@
+# Create Presidents Table
+
+CREATE TABLE IF NOT EXISTS Presidents (
+    `id` INT,
+    `President` VARCHAR(26) CHARACTER SET utf8,
+    `Party` VARCHAR(1) CHARACTER SET utf8,
+    `Home_State` VARCHAR(13) CHARACTER SET utf8,
+    `Occupation` VARCHAR(21) CHARACTER SET utf8,
+    `Serve_As_Vice_President` VARCHAR(3) CHARACTER SET utf8,
+    `Age` INT,
+    `Vice_President` VARCHAR(27) CHARACTER SET utf8,
+    `Re_elected` VARCHAR(4) CHARACTER SET utf8,
+    `Reason` VARCHAR(18) CHARACTER SET utf8,
+    `Term_Start_Date` DATETIME,
+    `Term_Finish_Date` DATETIME,
+    `First_Lady` VARCHAR(25) CHARACTER SET utf8
+);
+INSERT INTO Presidents VALUES
+    (1,'Donald John Trump','R','New York','Businessman','No',70,'Michael Richard Pence','null','null','2017-01-20 00:00:00','2021-01-20 00:00:00','Melania Trump'),
+    (2,'Barack Hussein Obama','D','Illinois','Senator','No',47,'Joseph Robinette Biden Jr. ','Yes','Improved Economy','2009-01-20 00:00:00','2017-01-20 00:00:00','Michelle LaVaughn Obama'),
+    (3,'George Walker Bush','R','Texas','Governor','No',54,'Richard Bruce Cheney','Yes','Safety after 9/11','2001-01-20 00:00:00','2009-01-20 00:00:00','Laura Lane Bush'),
+    (4,'William Jefferson Clinton','D','Arkansas','Governor','No',46,'Albert Arnold Gore Jr.','Yes','Strong Economy','1993-01-20 00:00:00','2001-01-20 00:00:00','Hillary Diane Clinton'),
+    (5,'George Herbert Walker Bush','R','Texas','CIA Director','Yes',64,'James Danforth Quayle','No','Economic Recession','1989-01-20 00:00:00','1993-01-20 00:00:00','Barbara Bush'),
+    (6,'Ronald Wilson Reagan','R','California','Governor','No',69,'George Herbert Walker Bush','Yes','Improved Economy','1981-01-20 00:00:00','1989-01-20 00:00:00','Anne Francis Reagan'),
+    (7,'James Earl Carter Jr. ','D','Georgia','Governor','No',52,'Walter Frederick Mondale','No','Economic Recession','1977-01-20 00:00:00','1981-01-20 00:00:00','Eleanor Rosalynn Carter'),
+    (8,'Gerald Rudolph Ford Jr. ','R','Michigan','House Minority Leader','Yes',61,'Nelson Aldrich Rockefeller','No','Watergate Scandal','1974-08-09 00:00:00','1977-01-20 00:00:00','Elizabeth Anne Ford'),
+    (9,'Richard Milhous Nixon','R','California','Senator','Yes',56,'Spiro Theodore Agnew','Yes','Strong Economy','1969-01-20 00:00:00','1974-08-09 00:00:00','Thelma Catherine Nixon'),
+    (10,'Lyndon Baines Johnson','D','Texas','Senator','Yes',55,'Hubert Horatio Humphrey Jr.','NA','Didn''t Run','1963-11-22 00:00:00','1969-01-20 00:00:00','Claudia Alta Johnson'),
+    (11,'John Fitzgerald Kennedy','D','Massachusetts','Senator','No',43,'Lyndon Baines Johnson','NA','Assassinated','1961-01-20 00:00:00','1963-11-22 00:00:00','Jacqueline Lee Kennedy'),
+    (12,'Dwight David Eisenhower','R','Kansas','Military General','No',62,'Richard Milhous Nixon','Yes','Period of Peace','1953-01-20 00:00:00','1961-01-20 00:00:00','Mamie Geneva Eisenhower'),
+    (13,'Harry Truman','D','Missouri','Senator','Yes',60,'Alben William Barkley','Yes','Strong Economy','1945-04-12 00:00:00','1953-01-20 00:00:00','Elizabeth Virginia Truman');
+
+# Create Presidency Table
+
+CREATE TABLE IF NOT EXISTS Presidency (
+    `id` INT,
+    `War` VARCHAR(16) CHARACTER SET utf8,
+    `Executive_Orders` INT,
+    `Average_GDP_Rate` NUMERIC(4, 3),
+    `Average_Unemployment_Rate` NUMERIC(4, 3),
+    `Unemployment_Rate_High` NUMERIC(4, 3),
+    `Unemployment_Rate_Low` NUMERIC(4, 3),
+    `Job_Creation_In_Millions` NUMERIC(3, 1),
+    `Job_Creation_Percentage` NUMERIC(4, 3),
+    `SCOTUS_Appointments` INT,
+    `Approval_Rating_Average` NUMERIC(3, 2),
+    `Approval_Rating_High` NUMERIC(3, 2),
+    `Approval_Rating_Low` NUMERIC(3, 2)
+);
+INSERT INTO Presidency VALUES
+    (1,'No',125,0.029,0.041,0.047,0.036,4.7,0.031,2,0.4,0.46,0.35),
+    (2,'Iraq War',276,0.015,0.074,0.1,0.047,8.9,0.062,2,0.48,0.67,0.4),
+    (3,'Iraq War',291,0.021,0.053,0.078,0.042,5.8,0.042,2,0.49,0.9,0.25),
+    (4,'No',308,0.039,0.052,0.071,0.038,18.6,0.156,2,0.55,0.73,0.37),
+    (5,'Persian Gulf War',166,0.023,0.063,0.078,0.05,2.9,0.025,2,0.61,0.89,0.29),
+    (6,'No',381,0.035,0.075,0.108,0.053,16.5,0.165,4,0.53,0.68,0.35),
+    (7,'No',320,0.033,0.065,0.078,0.056,9.8,0.109,0,0.46,0.75,0.28),
+    (8,'Vietnam War',169,0.026,0.078,0.09,0.055,3.6,0.042,1,0.47,0.71,0.37),
+    (9,'Vietnam War',346,0.028,0.05,0.061,0.034,9.4,0.122,4,0.49,0.67,0.24),
+    (10,'Vietnam War',325,0.053,0.042,0.057,0.034,8.6,0.126,2,0.55,0.79,0.35),
+    (11,'Vietnam War',214,0.043,0.06,0.071,0.054,2.4,0.037,2,0.7,0.83,0.56),
+    (12,'Vietnam War',484,0.03,0.049,0.075,0.025,4.8,0.079,5,0.65,0.79,0.48),
+    (13,'Korean War',907,0.017,0.042,0.079,0.027,6.9,0.13,4,0.45,0.87,0.22);
+    
+# Create Elections Table 
+
+CREATE TABLE IF NOT EXISTS Elections (
+    `id` INT,
+    `Opponent` VARCHAR(16) CHARACTER SET utf8,
+    `Opponent_Party` VARCHAR(1) CHARACTER SET utf8,
+    `Election_Year` INT,
+    `Electoral_Votes` INT,
+    `States_Carried` INT,
+    `Voter_Turnout` NUMERIC(4, 3),
+    `Popular_Vote` INT,
+    `Opponent_Popular_Vote` INT,
+    `Popular_Vote_Percentage` NUMERIC(5, 4),
+    `Opponent_Popular_Vote_Percentage` NUMERIC(5, 4),
+    `Popular_Vote_Win` VARCHAR(3) CHARACTER SET utf8
+);
+INSERT INTO Elections VALUES
+    (1,'Hillary Clinton','D',2016,304,30,0.557,62984828,65853514,0.461,0.482,'No'),
+    (2,'Mitt Romney','R',2012,332,26,0.549,65915795,60933504,0.511,0.472,'Yes'),
+    (2,'John McCain','R',2008,365,28,0.582,69498516,59948323,0.529,0.457,'Yes'),
+    (3,'John Kerry','D',2004,286,31,0.567,62040610,59028444,0.507,0.483,'Yes'),
+    (3,'Al Gore','D',2000,271,30,0.512,50456002,50999897,0.479,0.484,'No'),
+    (4,'Bob Dole','R',1996,379,31,0.49,47401185,39197469,0.492,0.407,'Yes'),
+    (4,'George H.W. Bush','R',1992,370,32,0.552,44909889,39104545,0.43,0.374,'Yes'),
+    (5,'Michael Dukakis','D',1988,426,40,0.502,48886597,41809074,0.534,0.456,'Yes'),
+    (6,'Walter Mondale','D',1984,525,49,0.533,54455472,37577352,0.588,0.406,'Yes'),
+    (6,'Jimmy Carter','D',1980,489,44,0.526,43903230,35480115,0.507,0.41,'Yes'),
+    (7,'Gerald Ford','R',1976,297,23,0.535,40831881,39148634,0.501,0.48,'Yes'),
+    (9,'George McGovern','D',1972,520,49,0.552,47168710,29173222,0.607,0.375,'Yes'),
+    (9,'Hubert Humphrey','D',1968,301,32,0.609,31783783,31271839,0.434,0.427,'Yes'),
+    (10,'Barry Goldwater','R',1964,486,44,0.619,43127041,27175754,0.611,0.385,'Yes'),
+    (11,'Richard Nixon','R',1960,303,22,0.628,34220984,34108157,0.4972,0.4955,'Yes'),
+    (12,'Adlai Stevenson','D',1956,457,41,0.606,35579180,26028028,0.574,0.42,'Yes'),
+    (12,'Adlai Stevenson','D',1952,442,39,0.633,34075529,27375090,0.552,0.443,'Yes'),
+    (13,'Thomas Dewey','R',1948,303,28,0.53,24179347,21991292,0.496,0.451,'Yes');
+
