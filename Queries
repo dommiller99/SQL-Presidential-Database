@@ -1,0 +1,289 @@
+/* Who were the Three Oldest Presidents? The Three Youngest Presidents? 
+Furthermore, do Democratic or Republican Presidents Tend to be Younger? */
+
+SELECT President, Age, Party FROM presidents
+ORDER BY Age DESC
+LIMIT 3
+
+SELECT President, Age, Party FROM presidents
+ORDER BY Age 
+LIMIT 3
+
+SELECT Party, AVG(Age) AS "Average Age"
+FROM presidents
+JOIN presidency USING (id)
+GROUP BY Party
+
+/* The three oldest presidents to serve were Donald Trump (70), Ronald Reagan (69), and George H.W. Bush (64). They are all Republicans.
+The three youngest presidents to serve were John F. Kennedy (43), Bill Clinton (46), and Barack Obama (47). They were all Democrats. 
+The average age of a Republican President is 62 (62.28) while the average age of a Democratic President is 51 (50.5). */
+
+# Which Presidents Served as Vice-President Before Becoming President?
+
+SELECT President FROM presidents
+WHERE Serve_As_Vice_President = "Yes"
+
+/* The Presidents who served as Vice-President before becoming President are George H.W. Bush, 
+Gerald Ford, Richard Nixon, Lyndon B. Johnson, and Harry Truman */
+
+# Do Governors or Senators Have Higher Approval Ratings?
+
+SELECT Occupation, AVG(Approval_Rating_Average * 100) AS  "Approval Rating Average"
+FROM presidents
+JOIN presidency USING (id)
+WHERE Occupation = "Governor" 
+GROUP BY Occupation
+SELECT Occupation, AVG(Approval_Rating_Average * 100) AS "Approval Rating Average"
+FROM presidents
+JOIN presidency USING (id)
+WHERE Occupation = "Senator" 
+GROUP BY Occupation
+
+/* Senators, on average, have higher approval ratings than Governors. The average Governor approval rating is 51% (50.75%) 
+while the average Senator approval rating is 53% (53.4%). */
+
+# Which Three Presidents Had the Most Executive Orders?
+
+SELECT DISTINCT President, Executive_Orders AS "Executive Orders"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Executive_Orders DESC
+LIMIT 3
+
+# The three presidents with the most Executive Orders were Harry Truman (907), Dwight Eisenhower (484), and Ronald Reagan (381).
+
+# Which Three Presidents Had the Highest Average GDP Rate?
+
+SELECT DISTINCT President, Party, Average_GDP_Rate * 100 AS "Average GDP Rate"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Average_GDP_Rate DESC
+LIMIT 3
+
+/* The three presidents with the highest average GDP Rates are Lyndon B. Johnson (5.3%), 
+John F. Kennedy (4.3%), and Bill Clinton (3.9%). All of these Presidents were Democrats. */
+
+/* Which Three Presidents Had the Lowest Average Unemployment Rate? Highest Average Unemployment? 
+Furthermore, Which Three Presidents Had Unemployment Rates with the Largest Range? */
+
+SELECT DISTINCT President, Average_Unemployment_Rate * 100 AS "Average Unemployment Rate"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Average_Unemployment_Rate 
+LIMIT 3
+
+SELECT DISTINCT President, Average_Unemployment_Rate * 100 AS "Average Unemployment Rate"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Average_Unemployment_Rate DESC
+LIMIT 3
+
+SELECT DISTINCT President, Unemployment_Rate_High * 100 - Unemployment_Rate_Low * 100 AS "Unemployment Rate Range"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Unemployment_Rate_High * 100 - Unemployment_Rate_Low *100 DESC
+LIMIT 3 
+
+/* The three presidents with the lowest average unemployment rate are Donald Trump (4.1%), Harry Truman (4.2%),
+and Lyndon B. Johnson (4.2%). The three presidents with the highest average unemployment rate are Gerald Ford (7.8%),
+Ronald Reagan (7.5%), and Barack Obama (7.4%). The Presidents with the largest unemployment rate ranges are Ronald Reagan (5.5%),
+Barack Obama (5.3%), and Harry Truman (5.2%). */
+
+# Do Republicans or Democrats Have More Supreme Court Appointments?
+
+SELECT Party, AVG(SCOTUS_Appointments) AS "Average Supreme Court Appointments"
+FROM presidents
+JOIN presidency USING (id)
+GROUP BY Party
+ORDER BY Party DESC
+
+/* The average Republican President gets 3 (2.86) Supreme Court Appointments while the average Democratic President
+gets 2 Supreme Court Appointments. */
+
+# Which Three Presidents Added the Most Jobs?
+
+SELECT DISTINCT President, Job_Creation_In_Millions AS "Job Creation in Millions"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Job_Creation_In_Millions DESC
+LIMIT 3
+
+SELECT DISTINCT President, Job_Creation_Percentage *  100 AS "Job Creation Percentage"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Job_Creation_Percentage DESC
+LIMIT 3
+
+/* The three presidents who added the most jobs were Bill Clinton (18.6 Million), Ronald Reagan (16.5 Million),
+and Jimmy Carter (9.8 Million). In terms of percentages Ronald Reagan added 16.5%, Bill Clinton added 15.6%,
+and Harry Truman added 13%. */
+
+# Do Democrats or Republicans have Better Economies?
+
+SELECT Party, AVG(Average_GDP_Rate) * 100 AS "Average GDP Rate"
+FROM presidents
+JOIN presidency USING (id)
+GROUP BY Party
+ORDER BY Party DESC
+
+SELECT Party, AVG(Average_Unemployment_Rate) * 100 AS "Average Unemployment Rate"
+FROM presidents
+JOIN presidency USING (id)
+GROUP BY Party
+ORDER BY Party DESC
+
+SELECT Party, AVG(Job_Creation_Percentage) * 100 AS "Job Creation Percentage"
+FROM presidents
+JOIN presidency USING (id)
+GROUP BY Party
+ORDER BY Party DESC
+
+/* By all metrics used Democrats preside over better economies than Republicans. The average Republican GDP Rate is 2.74%
+while the average for Democrats is 3.33%. The average Republican Unemployment Rate is 5.84% while the average for
+Democrats is 5.58%. Finally, the average Job Creation Percentage for Republicans is 7.23% while the average for Democrats is 10.33%. */
+
+# Do Democrats or Republicans have Higher Average Approval Ratings?
+
+SELECT Party, AVG(Approval_Rating_Average * 100) AS "Approval Rating Average"
+FROM presidents
+JOIN presidency USING (id)
+GROUP BY Party
+ORDER BY Party 
+
+# The average Republican approval rating is 52% while the average Democrat’s is 53% (53.167%)
+
+/* Which Three Presidents had the Highest Average Approval Ratings? Which Three Presidents had the Lowest 
+Average Approval Ratings? Which President had an Approval Rating with the Smallest Range? Largest Range? */
+
+SELECT DISTINCT President, Approval_Rating_Average * 100 AS "Approval Rating Average"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Approval_Rating_Average DESC
+LIMIT 3
+
+SELECT DISTINCT President, Approval_Rating_Average * 100 AS "Approval Rating Average"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Approval_Rating_Average
+LIMIT 3
+
+SELECT DISTINCT President, Approval_Rating_High * 100 - Approval_Rating_Low * 100 AS "Approval Rating Range"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Approval_Rating_High * 100 - Approval_Rating_Low * 100
+LIMIT 1
+
+SELECT DISTINCT President, Approval_Rating_High * 100 - Approval_Rating_Low * 100 AS "Approval Rating Range"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Approval_Rating_High * 100 - Approval_Rating_Low * 100 DESC
+LIMIT 1
+
+/* The three presidents with the highest average approval rating are John F. Kennedy (70%), Dwight Eisenhower (65%),
+and George H.W. Bush (61%). The three presidents with the lowest average approval rating are Donald Trump (40%),
+Harry Truman (45%), and Jimmy Carter (46%). The President with the lowest range is Donald Trump (11%) while the
+President with the highest range is George W. Bush (65%). */
+
+# Which Three Presidents had the Lowest Lows? Which Three Presidents had the Highest Highs?
+
+SELECT DISTINCT President, Approval_Rating_Low * 100 AS "Approval Rating Low"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Approval_Rating_Low
+LIMIT 3
+
+SELECT DISTINCT President, Approval_Rating_High * 100 AS "Approval Rating High"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+ORDER BY Approval_Rating_High DESC
+LIMIT 3
+
+/* The three presidents with the lowest approval rating lows are Harry Truman (22%), Richard Nixon (24%), and George W. Bush (25%).
+The three presidents with the highest approval rating highs are George W. Bush (90%), George H.W. Bush (89%), and Harry Truman (87%). */
+
+# Which President Received the Most Electoral Votes? Do Democrats or Republicans Tend to Get More Electoral Votes?
+
+SELECT DISTINCT President, Electoral_Votes AS "Electoral Votes"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+JOIN elections
+	ON presidents.id = elections.id
+ORDER BY Electoral_Votes DESC
+LIMIT 1
+
+SELECT Party, AVG(Electoral_Votes) 
+FROM presidents
+JOIN elections USING (id)
+GROUP BY Party
+ORDER BY Party DESC
+
+/* Ronald Reagan received the most Electoral Votes (525) in the 1984 election. Republicans, on average, 
+receive more Electoral Votes than Democrats. Republicans typically receive 402 (402.1) Electoral Votes 
+while Democrats receive 354 Electoral Votes (354.375). */
+
+# Which President had the Highest Voter Turnout? Do Democrats or Republicans Get Higher Voter Turnout?
+
+SELECT DISTINCT President, Voter_Turnout * 100 AS "Voter Turnout Percentage"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+JOIN elections
+	ON presidents.id = elections.id
+ORDER BY Voter_Turnout DESC
+LIMIT 1
+
+SELECT Party, AVG(Voter_Turnout * 100) AS "Average Voter Turnout"
+FROM presidents
+JOIN elections USING (id)
+GROUP BY Party
+ORDER BY Party DESC
+
+/* Dwight Eisenhower had the highest Voter Turnout (63.3%) in the 1952 election. The average voter turnout when
+a Republican wins is 56% (55.9%) while the average voter turnout for a winning Democrat is 56.1% (56.06%). */
+
+# Which President had the Highest Popular Vote Percentages? Do Democrats or Republicans Get Higher Popular Vote Percentages?
+
+SELECT DISTINCT President, Popular_Vote_Percentage * 100 AS "Popular Vote Percentage"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+JOIN elections
+	ON presidents.id = elections.id
+ORDER BY Popular_Vote_Percentage DESC
+LIMIT 1
+
+SELECT Party, AVG(Popular_Vote_Percentage * 100) AS "Average Popular Vote Percentage"
+FROM presidents
+JOIN elections USING (id)
+GROUP BY Party
+ORDER BY Party DESC
+
+/* Lyndon B. Johnson is the president with the highest Popular Vote Percentage. He garnered 61.1% of the popular vote 
+in the 1964 Election. Republicans, on average, get more of the popular vote than Democrats. The average Republican 
+Popular Vote Percentage is 52% (52.43%) while the average Democratic Percentage is 51% (50.84). */
+
+# Which Presidents won the Electoral Vote but Lost the Popular Vote?
+
+SELECT DISTINCT President, Popular_Vote_Win AS "Popular Vote Win"
+FROM presidency 
+JOIN presidents
+	ON presidency.ID = presidents.id
+JOIN elections
+	ON presidents.id = elections.id
+WHERE Popular_Vote_Win = "No"
+
+# The two presidents which won the Electoral Vote but lost the Popular Vote are Donald Trump and George W. Bush. 
